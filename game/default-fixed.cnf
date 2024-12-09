@@ -1,0 +1,86 @@
+ThePurge 1.0
+
+NUM_PLAYERS		   4	
+NUM_DAYS		   5
+NUM_ROUNDS_PER_DAY        50
+BOARD_ROWS	          20
+BOARD_COLS	          20
+
+NUM_INI_BUILDERS           1 	
+NUM_INI_WARRIORS	   1
+NUM_INI_MONEY             10
+NUM_INI_FOOD               5
+NUM_INI_GUNS               3
+NUM_INI_BAZOOKAS           1
+
+BUILDER_INI_LIFE          60
+WARRIOR_INI_LIFE         100
+MONEY_POINTS	          10
+KILL_BUILDER_POINTS       50	
+KILL_WARRIOR_POINTS      200	
+FOOD_INCR_LIFE	          20
+
+LIFE_LOST_IN_ATTACK       20
+BUILDER_STRENGTH_ATTACK    1
+HAMMER_STRENGTH_ATTACK     2
+GUN_STRENGTH_ATTACK        4
+BAZOOKA_STRENGTH_ATTACK    6
+
+BUILDER_STRENGTH_DEMOLISH  3
+HAMMER_STRENGTH_DEMOLISH   10
+GUN_STRENGTH_DEMOLISH      10
+BAZOOKA_STRENGTH_DEMOLISH  35
+
+NUM_ROUNDS_REGEN_BUILDER   30
+NUM_ROUNDS_REGEN_WARRIOR   50
+NUM_ROUNDS_REGEN_FOOD      5
+NUM_ROUNDS_REGEN_MONEY     1
+NUM_ROUNDS_REGEN_WEAPON    40
+
+BARRICADE_RESISTANCE_STEP  40
+BARRICADE_MAX_RESISTANCE   320
+MAX_NUM_BARRICADES         3
+
+FIXED
+
+   00000000001111111111
+   01234567890123456789
+00 .......BBBBBBBBBB...
+01 ..G....B....F......M
+02 .B.....B........M...
+03 .B.....B............
+04 .B.....BBBBBBBB.....
+05 .BM...........B..F..
+06 .B........G...B.....
+07 FB............B.....
+08 .B.Z...BBBBBBBB.....
+09 .B..................
+10 .B.....MM...........
+11 .B..................
+12 .B..........F.....M.
+13 GB...M..............
+14 .B...BBBBBBBBBBBBB..
+15 .B...............B..
+16 .B.......M.......B..
+17 .B............F..B..
+18 .....MM..........B..
+19 .................B..
+
+citizens
+8
+type id  player row column weapon life
+w    0   0      0   0      h     100
+w    1   1      19  13     g     100
+w    2   2      10  2      b     100
+w    3   3      8   17     h     100
+b    4   0      3   5      n      60
+b    5   1      17  9      n      60
+b    6   2      12  5      n      60
+b    7   3      10  18     n      60
+
+barricades
+3
+player row column resistance
+1      19  0      320
+1      19  1      160
+1      19  2      40
