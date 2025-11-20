@@ -1,25 +1,28 @@
-'''	AQUEST SCRIPT EXECUTA n_partides I FA UNA COMPARATIVA ENTRE ELLES
-
-	INPUT:
-	python3 comparador.py <Nom1> <Nom2> <Nom3> <Nom4> <n_partides>
-
-    OUTPUT:
-    - n_Jugador: nº del jugador
-    - NickJugador: Nom del jugador
-    - Mitja_Punts: Mitjana de punts obtinguts
-    - 1r: Nombre de cops que el jugador ha quedat en primera posició
-    - 2n: Nombre de cops que el jugador ha quedat en segona posició
-    - 3r: Nombre de cops que el jugador ha quedat en tercera posició
-    - 4t: Nombre de cops que el jugador ha quedat en quarta posició
-    - Pos_Mitja: Posició mitjana del jugador
-    - %Victoria: Percentatge de passar a la següent fase (quedar 1r o 2n)
-
-    RogeR Bit
 '''
+    AQUEST SCRIPT COMPARA EL RENDIMENT DE 4 JUGADORS (AIs)
+    EXECUTANT MÚLTIPLES PARTIDES I CALCULANT ESTADÍSTIQUES.
 
-# Posar aquí ruta directori game
-GAME_DIR = "game"
-# (on tingueu l'executable Game i els .o's)
+    PREREQUISITS:
+    - Executable './Game' al mateix directori
+    - Fitxer 'default.cnf' al mateix directori
+    - Els 4 jugadors (programes AI) especificats
+
+    INPUT:
+    python3 comparador.py <jugador1> <jugador2> <jugador3> <jugador4> <num_partides>
+
+    OUTPUT: 
+    - Jugador X: Identificador del jugador
+    - Punts Mitjos: Puntuació mitjana per partida
+    - 1r, 2n, 3r, 4t: Nombre de vegades que ha quedat en cada posició
+    - Pos Mitja: Posició mitjana ponderada (1.00 = sempre 1r, 4.00 = sempre 4t)
+    - % Clas: Percentatge de classificació al primer torn (1r + 2n)
+    
+    NOTES:
+    - Les partides s'executen amb seeds aleatòries
+    - Es mostra el guanyador de cada partida en temps real
+    - Durant l'execució es pot aturar amb Ctrl+C i mostrarà
+    les estadístiques parcials fins aquell moment.
+'''
 
 import os
 import random
@@ -40,17 +43,8 @@ def get_command(seed):
     c += " -i default.cnf "
     c += "2>&1 > /dev/null | grep 'got score'"
     return c
-
-if len(sys.argv) != 6:
-    print("Error: s'han d'introduir exactament 5 arguments:\npython3 comparador.py Nom1 Nom2 Nom3 Nom4 n_partides")
-    sys.exit(1)
-
-try:
-    os.chdir(GAME_DIR)
-except OSError:
-    print(f"Error: No s'ha pogut canviar al directori {GAME_DIR}")
-    sys.exit(1)
-
+  
+  
 random.seed(time.time())
 
 PLAYERS = sys.argv[1:5]
@@ -67,7 +61,7 @@ try:
     used = [0,0,0,0]
     llista = [0,0,0,0]
     for j,line in enumerate(p.stdout.readlines()):
-        llista[j] += int(re.findall("\d+", str(line))[-1])
+      llista[j] += int(re.findall("\d+", str(line))[-1])
 
     maxim = -1
     jugador = 1
@@ -124,17 +118,6 @@ for i in range(0,4):
         mitja[i] += float(j + 1)*float(guany[j][i])/float(count)
     clas[i] = float(guany[0][i] + guany[1][i])/float(count)
 
-print("Resultats de {} partides:\n".format(count))
-print("{:<12} {:<13} {:<10} {:<3} {:<3} {:<3} {:<3} {:<10} {:<10}".format("", "Nom", "Mitja Pts", "1r", "2n", "3r", "4t", "Pos_Mitja", "%Victoria"))
-for i in range(0, 4):
-    print("{:<12} {:<13} {:<10} {:<3} {:<3} {:<3} {:<5} {:<8.2f} {:<10.2f}".format(
-        "Jugador " + str(i + 1),
-        nom[i].strip() + ":",
-        punt[i] // count,
-        guany[0][i],
-        guany[1][i],
-        guany[2][i],
-        guany[3][i],
-        mitja[i],
-        clas[i]
-    ))
+for i in range(0,4):
+  print("Jugador "+str(i + 1) + " " + nom[i] + ": " + str(punt[i]//count) + " " + str(guany[0][i]) + " "\
++ str(guany[1][i]) + " " + str(guany[2][i]) + " " + str(guany[3][i]) + "  %.2f" % (mitja[i]) + "  %.2f" % (clas[i]))
