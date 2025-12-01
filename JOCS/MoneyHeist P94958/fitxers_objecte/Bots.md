@@ -71,3 +71,5 @@ Resultats de 15 partides:
 | Jugador 2| RoBiT_v2 |     1916  |  3 | 11 |  1 |  0 |     1.87  |      0.93  |
 | Jugador 3| RoBiT_v3 |     4096  | 12 |  3 |  0 |  0 |     1.20  |      1.00  |
 | Jugador 4| Dummy    |      512  |  0 |  0 |  2 | 13 |     3.87  |      0.00  |
+
+#### v3_1 bloqueja els enemics que van cap a la mateixa caixa que el professor, mentre que v3_2 bloqueja els professors que van cap a caixes enemigues. No he tingut '.os' el suficientment bons com per provar quin dels dos és millor.

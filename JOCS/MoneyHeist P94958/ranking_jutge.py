@@ -33,7 +33,7 @@ from bs4 import BeautifulSoup
 import math
 
 def fetch_and_parse_html(round_number):
-    url = BASE_URL + str(round_number)
+    url = f"{BASE_URL}/{round_number}"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
